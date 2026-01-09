@@ -1,0 +1,124 @@
+using System;
+
+namespace Task1
+{
+    interface Irc
+    {
+        void TurnOn();
+        void TurnOff();
+        void SetChannel(int channel);
+    }
+
+    class TvControl : Irc
+    {
+        public void TurnOn()
+        {
+            Console.WriteLine("Телевізор увімкнено");
+        }
+
+        public void TurnOff()
+        {
+            Console.WriteLine("Телевізор вимкнено");
+        }
+
+        public void SetChannel(int channel)
+        {
+            Console.WriteLine("Телевізор: канал " + channel);
+        }
+    }
+
+    class RadioControl : Irc
+    {
+        public void TurnOn()
+        {
+            Console.WriteLine("Радіо увімкнено");
+        }
+
+        public void TurnOff()
+        {
+            Console.WriteLine("Радіо вимкнено");
+        }
+
+        public void SetChannel(int channel)
+        {
+            Console.WriteLine("Радіо: " + channel);
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Irc tv = new TvControl();
+            tv.TurnOn();
+            tv.SetChannel(5);
+            tv.TurnOff();
+
+            Console.WriteLine();
+
+            Irc radio = new RadioControl();
+            radio.TurnOn();
+            radio.SetChannel(101);
+            radio.TurnOff();
+        }
+    }
+}
+////////////////////////////////////////
+
+using System;
+
+namespace Task2
+{
+    interface IValidator
+    {
+        bool Validate();
+    }
+
+    class EmailValidator : IValidator
+    {
+        public string Email;
+
+        public EmailValidator(string email)
+        {
+            Email = email;
+        }
+
+        public bool Validate()
+        {
+            if (Email.Contains("@") && Email.Contains("."))
+                return true;
+            else
+                return false;
+        }
+    }
+
+    class PasswordValidator : IValidator
+    {
+        public string Password;
+
+        public PasswordValidator(string password)
+        {
+            Password = password;
+        }
+
+        public bool Validate()
+        {
+            if (Password.Length >= 6)
+                return true;
+            else
+                return false;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            EmailValidator email = new EmailValidator("123@mail.com");
+            PasswordValidator password = new PasswordValidator("123456");
+
+            Console.WriteLine("Email підходить: " + email.Validate());
+            Console.WriteLine("Пароль підходить: " + password.Validate());
+        }
+    }
+}
